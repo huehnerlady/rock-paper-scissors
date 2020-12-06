@@ -10,3 +10,4 @@ enum class GameAction {
   }
 }
 
+enum class Winner{PLAYER_1, PLAYER_2, DRAW}

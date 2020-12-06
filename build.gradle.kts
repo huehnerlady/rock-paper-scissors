@@ -12,8 +12,20 @@ repositories {
   mavenCentral()
 }
 
-tasks.withType<KotlinCompile> {
-  kotlinOptions.jvmTarget = "14"
+dependencies {
+  testImplementation("io.kotest:kotest-runner-junit5:4.3.1")
+  testImplementation("io.kotest:kotest-assertions-core:4.3.1")
+  testImplementation("io.kotest:kotest-property:4.3.1")
+  testImplementation("io.mockk:mockk:1.10.3")
+}
+
+tasks {
+  test {
+    useJUnitPlatform()
+  }
+  withType<KotlinCompile>() {
+    kotlinOptions.jvmTarget = "14"
+  }
 }
 
 application {

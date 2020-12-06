@@ -12,10 +12,20 @@ class Game(private val round: Round = Round()) {
       .map { it.getWinner() }
       .groupingBy { it }
       .eachCount()
+
+    val winPlayer1 = results.getOrDefault(PLAYER_1, 0)
+    val winPlayer2 = results.getOrDefault(PLAYER_2, 0)
+    val winner = when{
+      winPlayer1 > winPlayer2 -> "Player 1"
+      winPlayer2 > winPlayer1 -> "Player 2"
+      else -> "Nobody"
+    }
+
     return GameResult(
-      winPlayer1 = results.getOrDefault(PLAYER_1, 0),
-      winPlayer2 = results.getOrDefault(PLAYER_2, 0),
-      draws = results.getOrDefault(DRAW, 0)
+      winPlayer1 = winPlayer1,
+      winPlayer2 = winPlayer2,
+      draws = results.getOrDefault(DRAW, 0),
+      winner = winner
     )
   }
 }

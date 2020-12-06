@@ -35,31 +35,31 @@ class GameTest : DescribeSpec() {
         mockkStatic(Pair<GameAction, GameAction>::getWinner)
         val roundResult = mockk<Pair<GameAction, GameAction>>()
         every { round.play() } returns roundResult
-        every { roundResult.getWinner() } returns PLAYER_1
+        every { roundResult.getWinner() } returnsMany listOf(DRAW, PLAYER_1, DRAW, PLAYER_2, PLAYER_1)
 
-        val result = game.play(10)
+        val result = game.play(5)
 
-        result shouldBe GameResult(10, 0, 0)
+        result shouldBe GameResult(2, 1, 2, "Player 1")
       }
       it("should calculate wins for player2") {
         mockkStatic(Pair<GameAction, GameAction>::getWinner)
         val roundResult = mockk<Pair<GameAction, GameAction>>()
         every { round.play() } returns roundResult
-        every { roundResult.getWinner() } returns PLAYER_2
+        every { roundResult.getWinner() } returnsMany listOf(DRAW, PLAYER_2, PLAYER_2, DRAW, PLAYER_1)
 
-        val result = game.play(10)
+        val result = game.play(5)
 
-        result shouldBe GameResult(0, 10, 0)
+        result shouldBe GameResult(1, 2, 2, "Player 2")
       }
       it("should calculate draws") {
         mockkStatic(Pair<GameAction, GameAction>::getWinner)
         val roundResult = mockk<Pair<GameAction, GameAction>>()
         every { round.play() } returns roundResult
-        every { roundResult.getWinner() } returns DRAW
+        every { roundResult.getWinner() } returnsMany listOf(PLAYER_2, DRAW, DRAW, DRAW, PLAYER_1)
 
-        val result = game.play(10)
+        val result = game.play(5)
 
-        result shouldBe GameResult(0, 0, 10)
+        result shouldBe GameResult(1, 1, 3, "Nobody")
       }
     }
   }

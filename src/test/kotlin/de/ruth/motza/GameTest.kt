@@ -6,10 +6,17 @@ import io.mockk.verify
 
 class GameTest : DescribeSpec() {
 
-  private val round = mockk<Round>()
+  private val round = mockk<Round>(relaxed = true)
   private val game = Game(round)
 
   init {
 
+    describe("rounds") {
+      it("should play 100 rounds") {
+        game.play()
+
+        verify(exactly = 100) { round.play() }
+      }
+    }
   }
 }

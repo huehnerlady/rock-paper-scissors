@@ -1,8 +1,10 @@
 package de.ruth.motza
 
+import de.ruth.motza.GameAction.ROCK
+
 class Round {
 
   fun play(): Pair<GameAction, GameAction> {
-    TODO()
+    return Pair(GameAction.random(), ROCK)
   }
 }

@@ -2,7 +2,7 @@ package de.ruth.motza
 
 import de.ruth.motza.GameAction.PAPER
 import de.ruth.motza.GameAction.ROCK
-import de.ruth.motza.GameAction.SCISSOR
+import de.ruth.motza.GameAction.SCISSORS
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.every
@@ -23,9 +23,9 @@ class RoundTest : DescribeSpec() {
         mockkObject(GameAction.Companion)
         every {
           GameAction.random()
-        } returnsMany listOf(PAPER, SCISSOR)
+        } returnsMany listOf(PAPER, SCISSORS)
         round.play().first shouldBe PAPER
-        round.play().first shouldBe SCISSOR
+        round.play().first shouldBe SCISSORS
       }
     }
   }
